@@ -5,16 +5,17 @@ const blinkstick = require('blinkstick'),
 function launchTardis() {
     // Set the array of milliseconds to pass before triggering the event
     let timeArray = new Array(10000, 15000, 20000, 30000)
+    // Light Length
 
     // Play the Audio 🔊
     playSound()
 
     // Trigger the LEDs 🚨
-    runLights(750)
-    setTimeout(function () { runLights(750); }, 2000);
-    setTimeout(function () { runLights(750); }, 4000);
-    setTimeout(function () { runLights(750); }, 6000);
-    setTimeout(function () { runLights(750); }, 8000);
+    runLights(100, 750)
+    setTimeout(function () { runLights(150, 750); }, 2000);
+    setTimeout(function () { runLights(200, 750); }, 4000);
+    setTimeout(function () { runLights(255, 650); }, 5750);
+    setTimeout(function () { runLights(255, 650); }, 7500);
 
     // Reset LEDs
     setTimeout(function () { ledReset(); }, 10000);
@@ -68,19 +69,19 @@ function randRange(data) {
     return newTime
 }
 
-function runLights(duration) {
+function runLights(intesity, duration) {
     if (led) {
 
-        led.pulse('white', { 'index': 0, 'duration': duration, 'steps': 50 }, function () {
+        led.pulse(intesity, intesity, intesity, { 'index': 0, 'duration': duration, 'steps': 50 }, function () {
             led.turnOff();
         })
-        led.pulse('white', { 'index': 1, 'duration': duration, 'steps': 50 }, function () {
+        led.pulse(intesity, intesity, intesity, { 'index': 1, 'duration': duration, 'steps': 50 }, function () {
             led.turnOff();
         })
-        led.pulse('white', { 'index': 2, 'duration': duration, 'steps': 50 }, function () {
+        led.pulse(intesity, intesity, intesity, { 'index': 2, 'duration': duration, 'steps': 50 }, function () {
             led.turnOff();
         })
-        led.pulse('white', { 'index': 3, 'duration': duration, 'steps': 50 }, function () {
+        led.pulse(intesity, intesity, intesity, { 'index': 3, 'duration': duration, 'steps': 50 }, function () {
             led.turnOff();
         })
 
