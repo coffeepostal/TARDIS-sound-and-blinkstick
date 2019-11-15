@@ -1,25 +1,31 @@
-let player = require('play-sound')(opts={})
-
-// //  Setup player
-// player.play('audio/tardis.mp3', function(err) {
-//     if(err) throw err
-// })
-
-// //  Setup player with timeout
-// player.play('audio/tardis.mp3', { timeout: 300 }, function (err) {
-//     if (err) throw err
-// })
-
-// //  Setup player with lower volume for afplay on OSX
-// player.play('audio/tardis.mp3', { afplay: ['-v', 1] }, function (err) {
-//     if (err) throw err
-// })
+const player = require('play-sound')(opts={})
+const blinkstick = require('blinkstick'),
+    led = blinkstick.findFirst();
 
 function playSound() {
     console.log('🚨Time and Relative Dimension in Space🚨')
     player.play('audio/tardis.mp3', function(err) {
         if(err) throw err
     })
+}
+
+function runLights() {
+    if (led) {
+
+        led.pulse('white', { 'index': 0, 'duration': 2000, 'steps': 50 }, function () {
+            led.turnOff();
+        })
+        led.pulse('white', { 'index': 1, 'duration': 2000, 'steps': 50 }, function () {
+            led.turnOff();
+        })
+        led.pulse('white', { 'index': 2, 'duration': 2000, 'steps': 50 }, function () {
+            led.turnOff();
+        })
+        led.pulse('white', { 'index': 3, 'duration': 2000, 'steps': 50 }, function () {
+            led.turnOff();
+        })
+
+    }
 }
 
 // tardis()
@@ -36,6 +42,9 @@ function launchTardis() {
     // Play the Audio 🔊
     playSound()
 
+    // Trigger the LEDs 🚨
+    runLights()
+
     // Clear the timer and reset it with the new time
     clearInterval(timer)
     timer = setInterval(launchTardis, randRange(timeArray))
@@ -45,4 +54,4 @@ function launchTardis() {
 }
 
 // 1000 = Initial timer when the page is first loaded
-let timer = setInterval(launchTardis, 1000)
+let timer = setInterval(launchTardis, 2000)
